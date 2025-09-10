@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Administración</title>
+  <link rel="stylesheet" href="admin.css">
+  <script type="module" src="admin.js" defer></script>
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <h1>Panel de Administración</h1>
+  </header>
+
+  <!-- FORMULARIOS -->
+  <main>
+    <!-- Servicios -->
+    <section>
+      <h2>Servicios</h2>
+      <form id="form-servicios" class="form">
+        <input type="text" id="titulo-servicio" placeholder="Título del servicio" required>
+        <textarea id="descripcion-servicio" placeholder="Descripción del servicio" required></textarea>
+        <input type="text" id="imagen-servicio" placeholder="Nombre de imagen (ej: servicio1.png)">
+        <button type="submit">Guardar Servicio</button>
+      </form>
+    </section>
+
+    <!-- Nosotros -->
+    <section>
+      <h2>Nosotros</h2>
+      <form id="form-nosotros" class="form">
+        <input type="text" id="titulo-nosotros" placeholder="Título" required>
+        <textarea id="descripcion-nosotros" placeholder="Descripción" required></textarea>
+        <input type="text" id="imagen-nosotros" placeholder="Nombre de imagen (ej: equipo1.png)">
+        <button type="submit">Guardar Información</button>
+      </form>
+    </section>
+
+    <!-- Contacto -->
+    <section>
+      <h2>Contacto</h2>
+      <form id="form-contacto" class="form">
+        <input type="text" id="titulo-contacto" placeholder="Título" required>
+        <textarea id="descripcion-contacto" placeholder="Descripción" required></textarea>
+        <input type="text" id="imagen-contacto" placeholder="Nombre de imagen (ej: mapa.png)">
+        <button type="submit">Guardar Contacto</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2025 Taller Automotriz | Panel Admin</p>
+  </footer>
+</body>
+</html>
