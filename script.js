@@ -37,8 +37,6 @@ function loadContent(path, container) {
         const img = document.createElement("img");
         img.src = "imagenes/" + data.imagen;
         img.alt = data.titulo || "Imagen";
-        img.style.width = "100%";
-        img.style.borderRadius = "8px";
         card.appendChild(img);
       }
 
@@ -60,7 +58,29 @@ function loadContent(path, container) {
   });
 }
 
-// Cargar secciones
+// Cargar secciones dinámicas desde Firebase
 loadContent("servicios", servicesContainer);
 loadContent("nosotros", aboutContainer);
 loadContent("contacto", contactContainer);
+
+// ======================
+// Carrusel Automático
+// ======================
+const slides = document.querySelector(".slides");
+const images = document.querySelectorAll(".slides img");
+let index = 0;
+
+function showSlide(i) {
+  slides.style.transform = `translateX(${-i * 100}%)`;
+}
+
+function nextSlide() {
+  index++;
+  if (index >= images.length) {
+    index = 0;
+  }
+  showSlide(index);
+}
+
+// Cambiar de imagen cada 4 segundos
+setInterval(nextSlide, 4000);

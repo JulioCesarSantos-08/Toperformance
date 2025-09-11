@@ -4,7 +4,7 @@ import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.12
 
 // Configuración Firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyBA_i9O3vXzFn2rIKY4XQzll2fLvmD-u3A",
+  apiKey: "AIzaSyBA_i9O3VxFn2rIKY4XQzll2fLvmD-u3A",
   authDomain: "toperformance-50d5a.firebaseapp.com",
   databaseURL: "https://toperformance-50d5a-default-rtdb.firebaseio.com",
   projectId: "toperformance-50d5a",
@@ -18,37 +18,41 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
 // Función para guardar datos
-function saveData(formId, path, inputs) {
+function saveData(formId, path, fields) {
   const form = document.getElementById(formId);
+  if (!form) return; // evita errores si no existe el form
+
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    const data = {};
-    inputs.forEach(id => {
-      data[id.split("-")[1]] = document.getElementById(id).value;
-    });
-    push(ref(db, path), data);
-    alert("Información guardada en " + path);
-    form.reset();
+
+    // Captura los valores según IDs definidos en el HTML
+    const data = {
+      titulo: document.getElementById(fields.titulo).value,
+      descripcion: document.getElementById(fields.descripcion).value,
+      imagen: document.getElementById(fields.imagen).value
+    };
+
+    push(ref(db, path), data)
+      .then(() => {
+        alert("Información guardada en " + path);
+        form.reset();
+      })
+      .catch((error) => {
+        console.error("Error guardando en Firebase:", error);
+      });
   });
 }
 
 // Guardar Servicios
-saveData("form-servicios", "servicios", [
-  "titulo-servicio",
-  "descripcion-servicio",
-  "imagen-servicio"
-]);
+saveData("form-servicios", "servicios", {
+  titulo: "titulo-servicio",
+  descripcion: "descripcion-servicio",
+  imagen: "imagen-servicio"
+});
 
 // Guardar Nosotros
-saveData("form-nosotros", "nosotros", [
-  "titulo-nosotros",
-  "descripcion-nosotros",
-  "imagen-nosotros"
-]);
-
-// Guardar Contacto
-saveData("form-contacto", "contacto", [
-  "titulo-contacto",
-  "descripcion-contacto",
-  "imagen-contacto"
-]);
+saveData("form-nosotros", "nosotros", {
+  titulo: "titulo-nosotros",
+  descripcion: "descripcion-nosotros",
+  imagen: "imagen-nosotros"
+});

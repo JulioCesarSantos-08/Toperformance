@@ -56,23 +56,28 @@ nav ul li a:hover {
 }
 
 .carousel {
+  position: relative;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 
 .slides {
   display: flex;
   width: 300%;
   height: 100%;
-  animation: slide 12s infinite;
+  animation: slide 12s infinite; /* 4s por imagen */
+  transition: transform 1s ease-in-out;
 }
 
 .slides img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover; /* se adapta a PC y móvil */
+  flex-shrink: 0;
 }
 
+/* Animación suave del carrusel */
 @keyframes slide {
   0% { transform: translateX(0); }
   30% { transform: translateX(0); }
@@ -111,17 +116,62 @@ nav ul li a:hover {
   color: #ff6600;
 }
 
+/* GRID TARJETAS */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(6, 1fr); /* 6 en escritorio */
   gap: 20px;
 }
 
 .grid .card {
   background: #fff;
-  padding: 20px;
+  padding: 15px;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.grid .card:hover {
+  transform: scale(1.05);
+}
+
+.grid .card img {
+  width: 100%;
+  max-height: 180px;
+  object-fit: contain;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.grid .card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+.grid .card p {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+/* CONTACTO */
+#contact-container {
+  max-width: 800px;
+  margin: auto;
+  text-align: left;
+}
+
+#contact-container p {
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+#contact-container iframe {
+  margin-top: 15px;
+  width: 100%;
+  height: 300px;
+  border: none;
+  border-radius: 8px;
 }
 
 /* FOOTER */
@@ -133,11 +183,20 @@ footer {
 }
 
 /* RESPONSIVE */
+@media (max-width: 992px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr); /* tablets */
+  }
+}
+
 @media (max-width: 768px) {
   .hero-text h1 {
     font-size: 2rem;
   }
   .hero-text p {
     font-size: 1rem;
+  }
+  .grid {
+    grid-template-columns: repeat(2, 1fr); /* celulares */
   }
 }
