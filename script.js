@@ -1,8 +1,12 @@
+// ==============================
 // Importar Firebase
+// ==============================
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
+// ==============================
 // Configuración de Firebase
+// ==============================
 const firebaseConfig = {
   apiKey: "AIzaSyBA_i9O3vXzFn2rIKY4XQzll2fLvmD-u3A",
   authDomain: "toperformance-50d5a.firebaseapp.com",
@@ -17,16 +21,24 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
+// ==============================
 // Referencias a los contenedores
+// ==============================
 const servicesContainer = document.getElementById("services-container");
 const aboutContainer = document.getElementById("about-container");
 const contactContainer = document.getElementById("contact-container");
 
-// Cargar datos de Firebase en tiempo real
-function loadContent(path, container) {
+// ==============================
+// Cargar datos de Firebase
+// ==============================
+function loadContent(path, container, useGrid = true) {
   const refPath = ref(db, path);
   onValue(refPath, (snapshot) => {
-    container.innerHTML = "";
+    if (useGrid) {
+      // Limpiar solo si es grid
+      container.innerHTML = "";
+    }
+
     snapshot.forEach((child) => {
       const data = child.val();
       const card = document.createElement("div");
@@ -59,13 +71,15 @@ function loadContent(path, container) {
 }
 
 // Cargar secciones dinámicas desde Firebase
-loadContent("servicios", servicesContainer);
-loadContent("nosotros", aboutContainer);
-loadContent("contacto", contactContainer);
+loadContent("servicios", servicesContainer, true);
+loadContent("nosotros", aboutContainer, true);
 
-// ======================
+// Contacto → no se borra el contenido fijo
+loadContent("contacto", contactContainer, false);
+
+// ==============================
 // Carrusel Automático
-// ======================
+// ==============================
 const slides = document.querySelector(".slides");
 const images = document.querySelectorAll(".slides img");
 let index = 0;
