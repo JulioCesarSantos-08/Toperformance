@@ -17,7 +17,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-// Función para guardar datos
+// =============================
+// Función genérica para guardar datos (Servicios y Nosotros)
+// =============================
 function saveData(formId, path, fields) {
   const form = document.getElementById(formId);
   if (!form) return; // evita errores si no existe el form
@@ -43,16 +45,52 @@ function saveData(formId, path, fields) {
   });
 }
 
+// =============================
 // Guardar Servicios
+// =============================
 saveData("form-servicios", "servicios", {
   titulo: "titulo-servicio",
   descripcion: "descripcion-servicio",
   imagen: "imagen-servicio"
 });
 
+// =============================
 // Guardar Nosotros
+// =============================
 saveData("form-nosotros", "nosotros", {
   titulo: "titulo-nosotros",
   descripcion: "descripcion-nosotros",
   imagen: "imagen-nosotros"
 });
+
+// =============================
+// Guardar Catálogo de Servicios con Precio y Categoría
+// =============================
+function saveCatalogo() {
+  const form = document.getElementById("form-catalogo");
+  if (!form) return;
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const data = {
+      nombre: document.getElementById("nombre-servicio").value,
+      descripcion: document.getElementById("descripcion-catalogo").value,
+      precio: document.getElementById("precio-servicio").value,
+      categoria: document.getElementById("categoria-servicio").value, // <-- NUEVO
+      imagen: document.getElementById("imagen-catalogo").value
+    };
+
+    push(ref(db, "catalogo"), data)
+      .then(() => {
+        alert("Servicio guardado en Catálogo");
+        form.reset();
+      })
+      .catch((error) => {
+        console.error("Error guardando en Firebase:", error);
+      });
+  });
+}
+
+// Llamamos la función del catálogo
+saveCatalogo();

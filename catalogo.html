@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo de Servicios | ToPerformance</title>
+  <link rel="stylesheet" href="catalogo.css">
+  <script type="module" src="catalogo.js" defer></script>
+  <!-- Iconos (para filtros, buscador, etc.) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <h1>Catálogo de Servicios</h1>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="catalogo.html" class="activo">Catálogo</a>
+      <a href="index.html#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <!-- BARRA DE HERRAMIENTAS -->
+  <section class="toolbar">
+    <input type="text" id="search" placeholder="🔍 Buscar servicio...">
+    
+    <!-- Select de categorías dinámicas -->
+    <select id="filtro-categoria">
+      <option value="">Todas las categorías</option>
+    </select>
+
+    <select id="ordenar-precio">
+      <option value="default">Ordenar por</option>
+      <option value="asc">Precio: Menor a Mayor</option>
+      <option value="desc">Precio: Mayor a Menor</option>
+    </select>
+  </section>
+
+  <!-- CATÁLOGO -->
+  <main>
+    <section class="catalogo">
+      <h2>Nuestros Servicios</h2>
+      <div id="catalogo-container" class="grid">
+        <!-- Aquí se insertarán dinámicamente las tarjetas -->
+      </div>
+    </section>
+  </main>
+
+  <!-- MODAL DETALLES -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div id="modal-body">
+        <!-- Detalles del servicio se insertan aquí -->
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2025 ToPerformance | Catálogo</p>
+  </footer>
+</body>
+</html>

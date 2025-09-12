@@ -27,15 +27,15 @@ const db = getDatabase(app);
 const servicesContainer = document.getElementById("services-container");
 const aboutContainer = document.getElementById("about-container");
 const contactContainer = document.getElementById("contact-container");
+const catalogoContainer = document.getElementById("catalogo-container");
 
 // ==============================
-// Cargar datos de Firebase
+// Función genérica para cargar contenido en grid o texto
 // ==============================
 function loadContent(path, container, useGrid = true) {
   const refPath = ref(db, path);
   onValue(refPath, (snapshot) => {
     if (useGrid) {
-      // Limpiar solo si es grid
       container.innerHTML = "";
     }
 
@@ -70,12 +70,43 @@ function loadContent(path, container, useGrid = true) {
   });
 }
 
-// Cargar secciones dinámicas desde Firebase
+// ==============================
+// Cargar datos desde Firebase
+// ==============================
 loadContent("servicios", servicesContainer, true);
 loadContent("nosotros", aboutContainer, true);
-
-// Contacto → no se borra el contenido fijo
 loadContent("contacto", contactContainer, false);
+
+// ==============================
+// Cargar Catálogo de Servicios (Cotizar)
+// ==============================
+function loadCatalogo() {
+  const refPath = ref(db, "catalogo");
+  onValue(refPath, (snapshot) => {
+    catalogoContainer.innerHTML = ""; // limpiar tabla
+    snapshot.forEach((child) => {
+      const data = child.val();
+      const row = document.createElement("tr");
+
+      const tdServicio = document.createElement("td");
+      tdServicio.textContent = data.servicio || "Sin nombre";
+
+      const tdDescripcion = document.createElement("td");
+      tdDescripcion.textContent = data.descripcion || "Sin descripción";
+
+      const tdPrecio = document.createElement("td");
+      tdPrecio.textContent = data.precio ? `$${data.precio} MXN` : "A cotizar";
+
+      row.appendChild(tdServicio);
+      row.appendChild(tdDescripcion);
+      row.appendChild(tdPrecio);
+
+      catalogoContainer.appendChild(row);
+    });
+  });
+}
+
+loadCatalogo();
 
 // ==============================
 // Carrusel Automático

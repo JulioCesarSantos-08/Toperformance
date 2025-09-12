@@ -13,6 +13,7 @@
     <h1>Panel de Administración</h1>
     <nav>
       <a href="informacion.html" class="btn-info">Ver Información Guardada</a>
+      <a href="catalogo.html" class="btn-catalogo">Ver Catálogo</a>
     </nav>
   </header>
 
@@ -37,6 +38,19 @@
         <textarea id="descripcion-nosotros" placeholder="Descripción" required></textarea>
         <input type="text" id="imagen-nosotros" placeholder="Nombre de imagen (ej: equipo1.png)">
         <button type="submit">Guardar Información</button>
+      </form>
+    </section>
+
+    <!-- Catálogo de Servicios -->
+    <section>
+      <h2>Catálogo de Servicios con Precios</h2>
+      <form id="form-catalogo" class="form">
+        <input type="text" id="nombre-servicio" placeholder="Nombre del servicio" required>
+        <textarea id="descripcion-catalogo" placeholder="Descripción" required></textarea>
+        <input type="number" id="precio-servicio" placeholder="Precio aproximado (MXN)" required>
+        <input type="text" id="categoria-servicio" placeholder="Categoría (ej: Autos Deportivos)" required>
+        <input type="text" id="imagen-catalogo" placeholder="Nombre de imagen (ej: catalogo1.png)">
+        <button type="submit">Guardar Servicio en Catálogo</button>
       </form>
     </section>
   </main>
